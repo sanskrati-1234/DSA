@@ -1,3 +1,5 @@
+/*You are traveller on a 2d grid, you begin in the top left corner and your goal is to travel to the bottom-right.
+ You may only more clacon or night*/ ß;
 // recursion
 const travel = (m, n) => {
   if (m === 0 || n == 0) return 0;
