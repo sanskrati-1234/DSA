@@ -15,4 +15,4 @@ function targetSumArray(numbers, target, memo = {}) {
   return memo[target];
 }
 
-console.log("targetSumArray", targetSumArray([7], 7));
+console.log("targetSumArray", targetSumArray([3, 4, 7], 7));
