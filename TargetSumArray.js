@@ -7,7 +7,7 @@ function targetSumArray(numbers, target, memo = {}) {
     let rem = target - num;
     let remArr = targetSumArray(numbers, rem);
     if (remArr) {
-      memo[target] = [num, ...remArr];
+      memo[rem] = [num, ...remArr];
       return [num, ...remArr];
     }
   }
