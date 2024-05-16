@@ -1,20 +1,23 @@
-const canConstruct = (target, arr, ans) => {
-  if (target.length === 0) return ans;
+const canConstruct = (target, arr) => {
+  if (target.length === 0) return true;
   for (let s of arr) {
-    if (target.startsWith(s)) {
+    if (target.indexOf(s) === 0) {
       let subfix = target.slice(s.length);
-
-      let an1 = canConstruct(subfix, arr, ans);
-      //if (an1) {
-      return ans.push([...an1, subfix]);
-      // }
-      // ans.push(...temp);
+      if (canConstruct(subfix, arr)) {
+        return true;
+      }
     }
-
-    return ans;
   }
+  return false;
 };
-console.log(canConstruct("abc", ["a", "b", "c", "bc"], []));
+// console.log(
+//   canConstruct("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaab", [
+//     "a",
+//     "aa",
+//     "aaaa",
+//     "aaaaaa",
+//   ])
+// );
 
 //
 
@@ -23,3 +26,30 @@ console.log(canConstruct("abc", ["a", "b", "c", "bc"], []));
 // via recursion
 // init memo
 // return
+
+const canConstructMemoized = (target, words, memo = {}) => {
+  if (target === "") return true;
+  if (target in memo) return memo[target];
+
+  for (let word of words) {
+    if (target.indexOf(word) === 0) {
+      memo[target] = canConstructMemoized(
+        target.slice(word.length),
+        words,
+        memo
+      );
+      if (memo[target]) {
+        return true;
+      }
+    }
+  }
+  memo[target] = false;
+  return false;
+};
+
+console.log(
+  canConstructMemoized(
+    "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaab",
+    ["a", "aa", "aaaa", "aaaaaa"]
+  )
+);
